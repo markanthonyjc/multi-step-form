@@ -5,7 +5,7 @@
 </head>
 <body>
 <main class="subscription">
-    <section class="subscription__left-panel">
+    <section class="subscription__steps-container">
         <div class="subscription__step">
             <span>1</span>
             <small>STEP 1</small>
@@ -25,6 +25,33 @@
             <span>4</span>
             <small>STEP 4</small>
             <span><strong>SUMMARY</strong></span>
+        </div>
+    </section>
+    <section class="subscription__step_content">
+        <div id="step-1" class="subscription__step-card">
+            <header class="subscription__step-card-header">
+                <h1>Personal Info</h1>
+                <p>Please provide your name, email address, and phone number</p>
+            </header>
+            <form action="#">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input id="name" name="name" type="text" class="form-control" placeholder="e.g. Stephen King">
+                </div>
+                <div class="form-group">
+                    <label for="email-address">Email Address</label>
+                    <input id="email-address" name="emailAddress" type="text" class="form-control" placeholder="e.g. Stephen King">
+                </div>
+                <div class="form-group">
+                    <label for="phone-number">Phone Number</label>
+                    <input id="phone-number" name="phoneNumber" type="text" class="form-control" placeholder="e.g. Stephen King">
+                </div>
+            </form>
+            <footer class="subscription__step-card-footer">
+                <button class="subscription__step-card-button subscription__step-card-button--next">
+                    <span>Next Step</span>
+                </button>
+            </footer>
         </div>
     </section>
 </main>
