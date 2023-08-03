@@ -2,29 +2,40 @@
 <html lang="en">
 <head>
     <title>Multi-step Form - Challenge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="">
 </head>
 <body>
 <main class="subscription">
     <section class="subscription__steps-container">
         <div class="subscription__step">
             <span>1</span>
-            <small>STEP 1</small>
-            <span><strong>YOUR INFO</strong></span>
+            <div>
+                <small>STEP 1</small>
+                <span><strong>YOUR INFO</strong></span>
+            </div>
         </div>
         <div class="subscription__step">
             <span>2</span>
-            <small>STEP 2</small>
-            <span><strong>SELECT PLAN</strong></span>
+            <div>
+                <small>STEP 2</small>
+                <span><strong>SELECT PLAN</strong></span>
+            </div>
         </div>
         <div class="subscription__step">
             <span>3</span>
-            <small>STEP 3</small>
-            <span><strong>ADD-ONS</strong></span>
+            <div>
+                <small>STEP 3</small>
+                <span><strong>ADD-ONS</strong></span>
+            </div>
         </div>
         <div class="subscription__step">
             <span>4</span>
-            <small>STEP 4</small>
-            <span><strong>SUMMARY</strong></span>
+            <div>
+                <small>STEP 4</small>
+                <span><strong>SUMMARY</strong></span>
+            </div>
         </div>
     </section>
     <section class="subscription__step_content">
@@ -40,11 +51,13 @@
                 </div>
                 <div class="form-group">
                     <label for="email-address">Email Address</label>
-                    <input id="email-address" name="emailAddress" type="text" class="form-control" placeholder="e.g. Stephen King">
+                    <input id="email-address" name="emailAddress" type="text" class="form-control"
+                           placeholder="e.g. Stephen King">
                 </div>
                 <div class="form-group">
                     <label for="phone-number">Phone Number</label>
-                    <input id="phone-number" name="phoneNumber" type="text" class="form-control" placeholder="e.g. Stephen King">
+                    <input id="phone-number" name="phoneNumber" type="text" class="form-control"
+                           placeholder="e.g. Stephen King">
                 </div>
             </form>
             <footer class="subscription__step-card-footer">
@@ -53,7 +66,7 @@
                 </button>
             </footer>
         </div>
-        <div id="step-2" class="subscription__step-card">
+        <div style="display: none" id="step-2" class="subscription__step-card">
             <header class="subscription__step-card-header">
                 <h1>Select your plan</h1>
                 <p>You have the option of monthly or yearly billing</p>
@@ -89,15 +102,17 @@
                 </div>
             </div>
             <footer class="subscription__step-card-footer">
-                <button id="backStepSP" type="button" class="subscription__step-card-button subscription__step-card-button--back">
+                <button id="backStepSP" type="button"
+                        class="subscription__step-card-button subscription__step-card-button--back">
                     <span>Go Back</span>
                 </button>
-                <button id="nextStepSP" type="button" class="subscription__step-card-button subscription__step-card-button--next">
+                <button id="nextStepSP" type="button"
+                        class="subscription__step-card-button subscription__step-card-button--next">
                     <span>Next Step</span>
                 </button>
             </footer>
         </div>
-        <div id="step-3" class="subscription__step-card">
+        <div style="display: none" id="step-3" class="subscription__step-card">
             <header class="subscription__step-card-header">
                 <h1>Pick add-ons</h1>
                 <p>Add-ons help enhance your gaming experience</p>
@@ -129,15 +144,17 @@
                 </div>
             </div>
             <footer class="subscription__step-card-footer">
-                <button id="backStepPA" type="button" class="subscription__step-card-button subscription__step-card-button--back">
+                <button id="backStepPA" type="button"
+                        class="subscription__step-card-button subscription__step-card-button--back">
                     <span>Go Back</span>
                 </button>
-                <button id="nextStepPA" type="button" class="subscription__step-card-button subscription__step-card-button--next">
+                <button id="nextStepPA" type="button"
+                        class="subscription__step-card-button subscription__step-card-button--next">
                     <span>Next Step</span>
                 </button>
             </footer>
         </div>
-        <div id="step-4" class="subscription__step-card">
+        <div style="display: none" id="step-4" class="subscription__step-card">
             <header class="subscription__step-card-header">
                 <h1>Finishing up</h1>
                 <p>Double-check everything looks OK before confirming</p>
@@ -167,10 +184,12 @@
                 </div>
             </div>
             <footer>
-                <button id="backStepFU" type="button" class="subscription__step-card-button subscription__step-card-button--back">
+                <button id="backStepFU" type="button"
+                        class="subscription__step-card-button subscription__step-card-button--back">
                     <span>Go Back</span>
                 </button>
-                <button id="nextStepFU" type="button" class="subscription__step-card-button subscription__step-card-button--next">
+                <button id="nextStepFU" type="button"
+                        class="subscription__step-card-button subscription__step-card-button--next">
                     <span>Next Step</span>
                 </button>
             </footer>
