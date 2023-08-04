@@ -4,7 +4,6 @@
     <title>Multi-step Form - Challenge</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/index.css">
-    <link rel="stylesheet" href="">
 </head>
 <body>
 <main class="subscription">
@@ -38,10 +37,10 @@
             </div>
         </div>
     </section>
-    <section class="subscription__step_content">
+    <section class="subscription__step-content">
         <div id="step-1" class="subscription__step-card">
             <header class="subscription__step-card-header">
-                <h1>Personal Info</h1>
+                <h1>Personal info</h1>
                 <p>Please provide your name, email address, and phone number</p>
             </header>
             <form action="#">
@@ -52,16 +51,16 @@
                 <div class="form-group">
                     <label for="email-address">Email Address</label>
                     <input id="email-address" name="emailAddress" type="text" class="form-control"
-                           placeholder="e.g. Stephen King">
+                           placeholder="e.g. stephenking@lorem.com">
                 </div>
                 <div class="form-group">
                     <label for="phone-number">Phone Number</label>
                     <input id="phone-number" name="phoneNumber" type="text" class="form-control"
-                           placeholder="e.g. Stephen King">
+                           placeholder="e.g. +1 234 567 890">
                 </div>
             </form>
             <footer class="subscription__step-card-footer">
-                <button id="nextStepPI" class="subscription__step-card-button subscription__step-card-button--next">
+                <button id="nextStep1" class="subscription__button subscription__button--next">
                     <span>Next Step</span>
                 </button>
             </footer>
@@ -103,11 +102,11 @@
             </div>
             <footer class="subscription__step-card-footer">
                 <button id="backStepSP" type="button"
-                        class="subscription__step-card-button subscription__step-card-button--back">
+                        class="subscription__button subscription__button--back">
                     <span>Go Back</span>
                 </button>
                 <button id="nextStepSP" type="button"
-                        class="subscription__step-card-button subscription__step-card-button--next">
+                        class="subscription__button subscription__button--next">
                     <span>Next Step</span>
                 </button>
             </footer>
@@ -145,11 +144,11 @@
             </div>
             <footer class="subscription__step-card-footer">
                 <button id="backStepPA" type="button"
-                        class="subscription__step-card-button subscription__step-card-button--back">
+                        class="subscription__button subscription__button subscription__button subscription__button--back">
                     <span>Go Back</span>
                 </button>
                 <button id="nextStepPA" type="button"
-                        class="subscription__step-card-button subscription__step-card-button--next">
+                        class="subscription__button subscription__button subscription__button subscription__button--next">
                     <span>Next Step</span>
                 </button>
             </footer>
@@ -185,15 +184,23 @@
             </div>
             <footer>
                 <button id="backStepFU" type="button"
-                        class="subscription__step-card-button subscription__step-card-button--back">
+                        class="subscription__button subscription__button subscription__button subscription__button--back">
                     <span>Go Back</span>
                 </button>
                 <button id="nextStepFU" type="button"
-                        class="subscription__step-card-button subscription__step-card-button--next">
+                        class="subscription__button subscription__button subscription__button subscription__button--next">
                     <span>Next Step</span>
                 </button>
             </footer>
         </div>
+    </section>
+    <section class="subscription__step-navigator">
+        <button id="backStep" type="button" class="subscription__button subscription__button--back">
+            <span>Go Back</span>
+        </button>
+        <button id="nextStep" class="subscription__button subscription__button--next">
+            <span>Next Step</span>
+        </button>
     </section>
 </main>
 </body>
