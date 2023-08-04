@@ -69,9 +69,54 @@ body {
 }
 
 .form-control::placeholder {
-    font-family: Ubuntu;
+    font-family: Ubuntu, sans-serif;
     font-weight: 500;
     color: hsl(231, 11%, 63%);
+}
+
+/* switch */
+
+.switch-control {
+    position: relative;
+}
+
+.switch-control input {
+    display: none;
+}
+
+.switch-check {
+    width: 40px;
+    height: 20px;
+    display: block;
+    background-color: hsl(213, 96%, 18%);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    /*transition: all .4s ease-in-out;*/
+}
+
+.switch-check::before {
+    content: '';
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    left: 3px;
+    bottom: 3px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: all .4s ease-in-out;
+}
+
+.switch-control input:checked + .switch-check::before {
+    left: 22px;
+    transition: all .4s ease-in-out;
+}
+
+/* price */
+
+.price {
+    color: hsl(231, 11%, 63%);
+    font-size: 0.9rem;
 }
 
 /* steps */
@@ -140,7 +185,7 @@ body {
 }
 
 .subscription__button {
-    font-family: Ubuntu;
+    font-family: Ubuntu, sans-serif;
     font-weight: 500;
 
     border-width: 0;
@@ -154,8 +199,18 @@ body {
     color: white;
 }
 
+.subscription__button--next:hover {
+    background-color: hsl(213, 96%, 18%, 0.8);
+    cursor: pointer;
+}
+
 .subscription__button--back {
     color: hsl(231, 11%, 63%);
+}
+
+.subscription__button--back:hover {
+    color: hsl(213, 96%, 18%);
+    cursor: pointer;
 }
 
 /* step card */
@@ -168,7 +223,7 @@ body {
 
     background-color: white;
     padding: 2rem 1.5rem;
-    max-width: 350px;
+    max-width: 340px;
     border-radius: 10px;
 }
 
@@ -188,4 +243,84 @@ body {
 
 .subscription__step-card-footer {
     display: none;
+}
+
+/* Plan selector */
+
+.subscription__step-card-plans {
+    display: flex;
+    flex-direction: column;
+}
+
+.subscription__step-card-plans > * {
+    margin-top: 12px;
+}
+
+.subscription__step-card-plan {
+    display: flex;
+    flex-direction: row;
+
+    border: 1px solid hsl(229, 24%, 87%);
+    border-radius: 8px;
+
+    padding: 1rem;
+}
+
+/*.subscription__step-card-plan:hover {*/
+/*    border-color: hsl(243, 100%, 62%);*/
+/*    cursor: pointer;*/
+/*    transition: all .4s ease-in-out;*/
+/*}*/
+
+.subscription__step-card-plan > * {
+    margin-right: 1rem;
+}
+
+.subscription__plan-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.subscription__plan-details > * {
+    margin-bottom: 5px;
+}
+
+.subscription__plan-details > span {
+    font-weight: 500;
+}
+
+.subscription__step-card-plan-type {
+    margin-top: 1.5rem;
+    border: 1px solid hsl(229, 24%, 87%, 0.05);
+    border-radius: 8px;
+    background-color: hsl(231, 100%, 99%);
+    height: 3rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.monthly-rate, .yearly-rate {
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.monthly-rate {
+    margin-right: 1.5rem;
+}
+
+.yearly-rate {
+    color: hsl(231, 11%, 63%);
+    margin-left: 1.5rem;
+}
+
+/* state */
+
+.active {
+    border-color: hsl(243, 100%, 62%);
+    background-color: hsla(243, 100%, 62%, 0.05);
+    cursor: pointer;
 }
