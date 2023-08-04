@@ -71,33 +71,34 @@
                 <p>You have the option of monthly or yearly billing</p>
             </header>
             <div class="subscription__step-card-plans">
-                <div class="subscription__step-card-plan subscription__step-card-plan--arcade">
+                <div class="subscription__step-card-plan active subscription__step-card-plan--arcade">
                     <img src="assets/images/icon-arcade.svg" alt="Arcade plan representation icon">
                     <div class="subscription__plan-details">
-                        <span><strong>Arcade</strong></span>
+                        <span>Arcade</span>
                         <span id="arcade-plan-price" class="price">$9/mo</span>
                     </div>
                 </div>
                 <div class="subscription__step-card-plan subscription__step-card-plan--advanced">
                     <img src="assets/images/icon-advanced.svg" alt="Advanced plan representation icon">
                     <div class="subscription__plan-details">
-                        <span><strong>Advanced</strong></span>
-                        <span id="advanced-plan-price" class="price">$9/mo</span>
+                        <span>Advanced</span>
+                        <span id="advanced-plan-price" class="price">$12/mo</span>
                     </div>
                 </div>
                 <div class="subscription__step-card-plan subscription__step-card-plan--pro">
                     <img src="assets/images/icon-pro.svg" alt="Professional plan representation icon">
                     <div class="subscription__plan-details">
-                        <span><strong>Pro</strong></span>
-                        <span id="pro-plan-price" class="price">$9/mo</span>
+                        <span>Pro</span>
+                        <span id="pro-plan-price" class="price">$15/mo</span>
                     </div>
                 </div>
                 <div class="subscription__step-card-plan-type">
-                    <label for="switch-plan">
-                        <span class="monthly-rate">Monthly</span>
-                        <input id="switch-plan" type="checkbox" class="switch-control">
-                        <span class="yearly-rate">Yearly</span>
+                    <span class="monthly-rate">Monthly</span>
+                    <label for="switch-plan" class="switch-control">
+                        <input id="switch-plan" type="checkbox">
+                        <span class="switch-check"></span>
                     </label>
+                    <span class="yearly-rate">Yearly</span>
                 </div>
             </div>
             <footer class="subscription__step-card-footer">
