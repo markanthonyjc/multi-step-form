@@ -38,7 +38,7 @@
         </div>
     </section>
     <section class="subscription__step-content">
-        <div style="display: none" id="step-1" class="subscription__step-card">
+        <div id="step-1" class="subscription__step-card">
             <header class="subscription__step-card-header">
                 <h1>Personal info</h1>
                 <p>Please provide your name, email address, and phone number.</p>
@@ -112,7 +112,8 @@
                 </button>
             </footer>
         </div>
-        <div id="step-3" class="subscription__step-card subscription__step-card--reset-box-sizing">
+        <div style="display: none" id="step-3"
+             class="subscription__step-card subscription__step-card--reset-box-sizing">
             <header class="subscription__step-card-header">
                 <h1>Pick add-ons</h1>
                 <p>Add-ons help enhance your gaming experience.</p>
@@ -160,30 +161,32 @@
                 <p>Double-check everything looks OK before confirming</p>
             </header>
             <div class="subscription__step-card-summary">
-                <div class="subscription__step-card-summary-plan-selected">
-                    <div>
-                        <span id="selected-plan"><strong>Arcade (Monthly)</strong></span>
-                        <a href="#" title="Link to plan selector">Change</a>
+                <div class="subscription__summary-container">
+                    <div class="subscription__summary-plan-selected">
+                        <div>
+                            <span id="selected-plan"><strong>Arcade (Monthly)</strong></span>
+                            <a href="#" title="Link to plan selector">Change</a>
+                        </div>
+                        <span id="summary-price" class="price price--summary"><strong>$9/mo</strong></span>
                     </div>
-                    <span id="summary-price" class="price price--navy-blue"><strong>$9/mo</strong></span>
+                    <hr>
+                    <div class="subscription__summary-add-ons-selected">
+                        <div>
+                            <span>Online service</span>
+                            <span class="price price--summary">+1$/mo</span>
+                        </div>
+                        <div>
+                            <span>Larger storage</span>
+                            <span class="price price--summary">+2$/mo</span>
+                        </div>
+                    </div>
                 </div>
-                <hr>
-                <div class="subscription__step-card-summary-add-ons-selected">
-                    <div>
-                        <span>Online service</span>
-                        <span class="price price--navy-blue">+1$/mo</span>
-                    </div>
-                    <div>
-                        <span>Larger storage</span>
-                        <span class="price price--navy-blue">+2$/mo</span>
-                    </div>
-                </div>
-                <div class="subscription__step-card-summary-total">
-                    <span>Total (per month)</span>
-                    <span id="summary-total-price" class="price"><strong>+$12/mo</strong></span>
+                <div class="subscription__summary-total">
+                    <span id="summary-total-name">Total (per month)</span>
+                    <span id="summary-total-price" class="price price--summary-total"><strong>+$12/mo</strong></span>
                 </div>
             </div>
-            <footer>
+            <footer class="subscription__step-card-footer">
                 <button id="backStepFU" type="button"
                         class="subscription__button subscription__button subscription__button subscription__button--back">
                     <span>Go Back</span>
@@ -200,7 +203,7 @@
             <span>Go Back</span>
         </button>
         <button id="nextStep" class="subscription__button subscription__button--next">
-            <span>Next Step</span>
+            <span id="nextStepCaption">Next Step</span>
         </button>
     </section>
 </main>
