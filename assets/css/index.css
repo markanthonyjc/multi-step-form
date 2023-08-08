@@ -1,0 +1,589 @@
+/* region global */
+
+@font-face {
+    font-family: Ubuntu;
+    src: url("/assets/fonts/Ubuntu-Regular.ttf");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Ubuntu;
+    src: url("/assets/fonts/Ubuntu-Medium.ttf");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Ubuntu;
+    src: url("/assets/fonts/Ubuntu-Bold.ttf");
+    font-weight: bold;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    max-width: 100vw;
+    display: flex;
+    flex-direction: column;
+
+    background-color: hsl(217, 100%, 97%);
+    font-family: Ubuntu, sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: hsl(213, 96%, 18%);
+}
+
+/* endregion */
+
+/* region main Layout */
+
+.subscription {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    vertical-align: center;
+}
+
+/* endregion */
+
+/* region from group */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.form-group > label {
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+}
+
+/* endregion */
+
+/* region form control*/
+
+.form-control {
+    border: 1px solid hsl(229, 24%, 87%);
+    border-radius: 5px;
+    padding: 12px 17px;
+
+    font-family: Ubuntu, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: hsl(213, 96%, 18%);
+}
+
+.form-control:hover {
+    border-color: hsl(243, 100%, 62%);
+}
+
+.form-control:focus {
+    border-color: hsl(243, 100%, 62%);
+    outline: none;
+}
+
+.form-control::placeholder {
+    font-family: Ubuntu, sans-serif;
+    font-weight: 500;
+    color: hsl(231, 11%, 63%);
+}
+
+/* endregion */
+
+/* region switch */
+
+.switch-control {
+    position: relative;
+}
+
+.switch-control input {
+    display: none;
+}
+
+.switch-check {
+    width: 40px;
+    height: 20px;
+    display: block;
+    background-color: hsl(213, 96%, 18%);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.switch-check::before {
+    content: '';
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    left: 3px;
+    bottom: 3px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: all .4s ease-in-out;
+}
+
+.switch-control input:checked + .switch-check::before {
+    left: 22px;
+    transition: all .4s ease-in-out;
+}
+
+/* endregion */
+
+/* region price */
+
+.price {
+    color: hsl(231, 11%, 63%);
+    font-size: 0.9rem;
+}
+
+.price--add-on {
+    color: hsl(243, 100%, 62%);
+}
+
+.price--summary {
+    color: hsl(213, 96%, 18%);
+}
+
+.price--summary-total {
+    color: hsl(243, 100%, 62%);
+}
+
+/* endregion */
+
+/* region hr */
+
+hr {
+    height: 1px;
+    background-color: hsl(229, 24%, 87%);
+    border: none;
+}
+
+/* endregion */
+
+/* region steps */
+
+.subscription__steps-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: start;
+    grid-gap: 20px;
+
+    background-image: url("/assets/images/bg-sidebar-mobile.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 200px;
+}
+
+.subscription__step {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2rem;
+
+    cursor: pointer;
+}
+
+.subscription__step--selected {
+    background-color: hsl(206, 94%, 87%);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.subscription__step--selected > span:first-child {
+    color: hsl(213, 96%, 18%);
+}
+
+.subscription__step > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+
+    font-weight: 500;
+    color: white;
+}
+
+.subscription__step div {
+    display: none;
+}
+
+/*.subscription__step div > span:first-child {*/
+/*    color: hsl(231, 11%, 63%);*/
+/*}*/
+
+/*.subscription__step div > span:last-child {*/
+/*    color: white;*/
+/*}*/
+
+/* endregion */
+
+/* region step content */
+
+.subscription__step-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 75px;
+}
+
+/* endregion */
+
+/* region Step navigator and buttons */
+
+.subscription__step-navigator {
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    margin-top: 50px;
+    padding: 15px;
+
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.subscription__button {
+    font-family: Ubuntu, sans-serif;
+    font-weight: 500;
+
+    border-width: 0;
+    border-radius: 5px;
+    padding: 12px 17px;
+    background-color: unset;
+}
+
+.subscription__button--next {
+    background-color: hsl(213, 96%, 18%);
+    color: white;
+}
+
+.subscription__button--next:hover {
+    background-color: hsl(213, 96%, 18%, 0.8);
+    cursor: pointer;
+}
+
+.subscription__button--back {
+    color: hsl(231, 11%, 63%);
+}
+
+.subscription__button--back:hover {
+    color: hsl(213, 96%, 18%);
+    cursor: pointer;
+}
+
+.subscription__button--confirm {
+    background-color: hsl(243, 100%, 62%);
+    color: white;
+}
+
+.subscription__button--confirm:hover {
+    background-color: hsl(243, 100%, 62%, 0.8);
+    cursor: pointer;
+}
+
+/* endregion */
+
+/* region step card */
+
+.subscription__step-card {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 100px;
+
+    background-color: white;
+    padding: 1.5rem;
+    /*max-width: 340px;*/
+    margin: 0 1rem;
+    border-radius: 10px;
+}
+
+.subscription__step-card > * {
+    margin-top: 1rem;
+}
+
+.subscription__step-card-header {
+    display: flex;
+    flex-direction: column;
+}
+
+.subscription__step-card-header > *:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.subscription__step-card-header > p {
+    color: hsl(231, 11%, 63%);
+    line-height: 1.5rem;
+}
+
+.subscription__step-card-footer {
+    display: none;
+}
+
+/* endregion */
+
+/* region plan selector */
+
+.subscription__step-card-plans {
+    display: flex;
+    flex-direction: column;
+}
+
+.subscription__step-card-plans > * {
+    margin-top: 12px;
+}
+
+.subscription__step-card-plan {
+    display: flex;
+    flex-direction: row;
+
+    border: 1px solid hsl(229, 24%, 87%);
+    border-radius: 8px;
+
+    padding: 1rem;
+}
+
+.subscription__step-card-plan:hover {
+    border-color: hsl(243, 100%, 62%);
+    cursor: pointer;
+    transition: all .4s ease-in-out;
+}
+
+.subscription__step-card-plan > * {
+    margin-right: 1rem;
+}
+
+.subscription__plan-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.subscription__plan-details > * {
+    margin-bottom: 5px;
+}
+
+.subscription__plan-details > span {
+    font-weight: 500;
+}
+
+.subscription__step-card-plan-type {
+    margin-top: 1.5rem;
+    border: 1px solid hsl(229, 24%, 87%, 0.05);
+    border-radius: 8px;
+    background-color: hsl(231, 100%, 99%);
+    height: 3rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.monthly-rate, .yearly-rate {
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.monthly-rate {
+    margin-right: 1.5rem;
+}
+
+.yearly-rate {
+    color: hsl(231, 11%, 63%);
+    margin-left: 1.5rem;
+}
+
+/* endregion */
+
+/* region pick add-ons */
+
+.subscription__step-card-add-ons {
+    display: flex;
+    flex-direction: column;
+}
+
+.subscription__step-card-add-ons > * {
+    margin-top: 12px;
+}
+
+.subscription__step-add-on {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    border: 1px solid hsl(229, 24%, 87%);
+    border-radius: 8px;
+
+    padding: 1rem;
+}
+
+.subscription__step-add-on > div {
+    flex-grow: 1;
+}
+
+.subscription__step-add-on > span {
+    font-size: 0.77rem;
+}
+
+.subscription__step-add-on > *:not(:last-child) {
+    margin-right: 1rem;
+}
+
+.subscription__step-add-on:hover {
+    border-color: hsl(243, 100%, 62%);
+    cursor: pointer;
+    transition: all .4s ease-in-out;
+}
+
+.subscription__step-add-on-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.subscription__step-add-on > input[type='checkbox'] {
+    appearance: none;
+    border: 1px solid hsl(229, 24%, 87%);
+    border-radius: 3px;
+    height: 20px;
+    width: 20px;
+}
+
+.subscription__step-add-on > input[type='checkbox']::before {
+    content: "\2714";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    color: white;
+    opacity: 0;
+    height: inherit;
+    width: inherit;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.subscription__step-add-on > input[type='checkbox']:checked {
+    border-color: transparent;
+}
+
+.subscription__step-add-on > input[type="checkbox"]:checked::before {
+    background-color: hsl(243, 100%, 62%);
+    border-radius: inherit;
+    height: inherit;
+    width: inherit;
+    opacity: 1;
+}
+
+.subscription__step-add-on-details > span {
+    display: block;
+}
+
+.subscription__step-add-on-details > span:first-child {
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+}
+
+.subscription__step-add-on-details > span:last-child {
+    color: hsl(231, 11%, 63%);
+}
+
+/* endregion */
+
+/* region finishing up */
+
+.subscription__step-card-summary {
+    display: flex;
+    flex-direction: column;
+}
+
+.subscription__summary-container {
+    display: flex;
+    flex-direction: column;
+    background-color: hsl(231, 100%, 99%);
+
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.subscription__summary-plan-selected {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin-bottom: 1rem;
+}
+
+.subscription__summary-plan-selected > div {
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.subscription__summary-plan-selected > div > a {
+    font-weight: 500;
+    color: hsl(231, 11%, 63%);
+}
+
+.subscription__summary-plan-selected > div > a:hover {
+    color: hsl(243, 100%, 62%);
+}
+
+.subscription__summary-add-ons-selected {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    margin-top: 1rem;
+}
+
+.subscription__summary-add-ons-selected span:nth-child(odd) {
+    color: hsl(231, 11%, 63%);
+}
+
+.subscription__summary-add-ons-selected > div {
+    display: flex;
+    flex-direction: row;
+
+    margin-bottom: 1rem;
+}
+
+.subscription__summary-add-ons-selected > div > span:first-child {
+    flex-grow: 1;
+}
+
+.subscription__summary-total {
+    display: flex;
+    flex-direction: row;
+
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.subscription__summary-total > span:first-child {
+    flex-grow: 1;
+    color: hsl(231, 11%, 63%);
+}
+
+/* endregion */
+
+/* region state */
+
+.active {
+    border-color: hsl(243, 100%, 62%);
+    background-color: hsla(243, 100%, 62%, 0.05);
+    cursor: pointer;
+}
+
+/* endregion */
