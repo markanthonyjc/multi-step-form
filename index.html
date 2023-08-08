@@ -38,10 +38,10 @@
         </div>
     </section>
     <section class="subscription__step-content">
-        <div id="step-1" class="subscription__step-card">
+        <div style="display: none" id="step-1" class="subscription__step-card">
             <header class="subscription__step-card-header">
                 <h1>Personal info</h1>
-                <p>Please provide your name, email address, and phone number</p>
+                <p>Please provide your name, email address, and phone number.</p>
             </header>
             <form action="#">
                 <div class="form-group">
@@ -68,7 +68,7 @@
         <div style="display: none" id="step-2" class="subscription__step-card">
             <header class="subscription__step-card-header">
                 <h1>Select your plan</h1>
-                <p>You have the option of monthly or yearly billing</p>
+                <p>You have the option of monthly or yearly billing.</p>
             </header>
             <div class="subscription__step-card-plans">
                 <div class="subscription__step-card-plan active subscription__step-card-plan--arcade">
@@ -112,35 +112,35 @@
                 </button>
             </footer>
         </div>
-        <div style="display: none" id="step-3" class="subscription__step-card">
+        <div id="step-3" class="subscription__step-card subscription__step-card--reset-box-sizing">
             <header class="subscription__step-card-header">
                 <h1>Pick add-ons</h1>
-                <p>Add-ons help enhance your gaming experience</p>
+                <p>Add-ons help enhance your gaming experience.</p>
             </header>
             <div class="subscription__step-card-add-ons">
-                <div class="subscription__step-add-on">
-                    <input id="online-service" type="checkbox" class="control-add-on">
+                <div class="subscription__step-add-on active">
+                    <input id="online-service" type="checkbox" checked>
                     <div class="subscription__step-add-on-details">
-                        <span><strong>Online service</strong></span>
-                        <span>Access to multiplayer games</span>
+                        <span>Online service</span>
+                        <span><small>Access to multiplayer games</small></span>
                     </div>
-                    <span class="price">+$10/mo</span>
+                    <span class="price price--add-on">+$10/mo</span>
+                </div>
+                <div class="subscription__step-add-on active">
+                    <input id="larger-storage" type="checkbox" checked>
+                    <div class="subscription__step-add-on-details">
+                        <span>Larger storage</span>
+                        <span><small>Extra 1TB of cloud save</small></span>
+                    </div>
+                    <span class="price price--add-on">+$12/mo</span>
                 </div>
                 <div class="subscription__step-add-on">
-                    <input id="larger-storage" type="checkbox" class="control-add-on">
+                    <input id="customizable-profile" type="checkbox">
                     <div class="subscription__step-add-on-details">
-                        <span><strong>Larger storage</strong></span>
-                        <span>Extra 1TB of cloud save</span>
+                        <span>Customizable profile</span>
+                        <span><small>Custom theme on your profile</small></span>
                     </div>
-                    <span class="price">+$12/mo</span>
-                </div>
-                <div class="subscription__step-add-on">
-                    <input id="customizable-profile" type="checkbox" class="control-add-on">
-                    <div class="subscription__step-add-on-details">
-                        <span><strong>Customizable profile</strong></span>
-                        <span>Access to multiplayer games</span>
-                    </div>
-                    <span class="price">+$20/mo</span>
+                    <span class="price price--add-on">+$20/mo</span>
                 </div>
             </div>
             <footer class="subscription__step-card-footer">
