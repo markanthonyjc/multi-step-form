@@ -68,9 +68,22 @@ body {
 
 .form-control {
     border: 1px solid hsl(229, 24%, 87%);
-    border-radius: 3px;
+    border-radius: 5px;
     padding: 12px 17px;
+
+    font-family: Ubuntu, sans-serif;
     font-size: 1rem;
+    font-weight: 500;
+    color: hsl(213, 96%, 18%);
+}
+
+.form-control:hover {
+    border-color: hsl(243, 100%, 62%);
+}
+
+.form-control:focus {
+    border-color: hsl(243, 100%, 62%);
+    outline: none;
 }
 
 .form-control::placeholder {
@@ -166,13 +179,25 @@ hr {
     height: 200px;
 }
 
-.subscription__steps-container > .subscription__step {
+.subscription__step {
     display: flex;
     flex-direction: row;
     margin-top: 2rem;
+
+    cursor: pointer;
 }
 
-.subscription__steps-container > .subscription__step > span {
+.subscription__step--selected {
+    background-color: hsl(206, 94%, 87%);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.subscription__step--selected > span:first-child {
+    color: hsl(213, 96%, 18%);
+}
+
+.subscription__step > span {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -186,9 +211,17 @@ hr {
     color: white;
 }
 
-.subscription__steps-container > .subscription__step div {
+.subscription__step div {
     display: none;
 }
+
+/*.subscription__step div > span:first-child {*/
+/*    color: hsl(231, 11%, 63%);*/
+/*}*/
+
+/*.subscription__step div > span:last-child {*/
+/*    color: white;*/
+/*}*/
 
 /* endregion */
 
@@ -498,6 +531,15 @@ hr {
     flex-direction: column;
 }
 
+.subscription__summary-plan-selected > div > a {
+    font-weight: 500;
+    color: hsl(231, 11%, 63%);
+}
+
+.subscription__summary-plan-selected > div > a:hover {
+    color: hsl(243, 100%, 62%);
+}
+
 .subscription__summary-add-ons-selected {
     display: flex;
     flex-direction: column;
@@ -531,6 +573,7 @@ hr {
 
 .subscription__summary-total > span:first-child {
     flex-grow: 1;
+    color: hsl(231, 11%, 63%);
 }
 
 /* endregion */
