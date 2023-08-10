@@ -92,6 +92,10 @@ body {
     color: hsl(231, 11%, 63%);
 }
 
+.invalid-control {
+    border-color: hsl(354, 84%, 57%);
+}
+
 /* endregion */
 
 /* region switch */
@@ -303,9 +307,17 @@ hr {
 
     background-color: white;
     padding: 1.5rem;
-    /*max-width: 340px;*/
     margin: 0 1rem;
     border-radius: 10px;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.subscription__step-card.shown {
+    opacity: 1;
+    visibility: visible;
 }
 
 .subscription__step-card > * {
@@ -618,9 +630,10 @@ hr {
 }
 
 .subscription__thank-you > p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     text-align: center;
     color: hsl(231, 11%, 63%);
+    line-height: 1.5rem;
 }
 
 /* endregion */
