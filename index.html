@@ -7,29 +7,29 @@
 </head>
 <body>
 <main class="subscription">
-    <section class="subscription__steps-container">
-        <div class="subscription__step subscription__step--selected">
+    <section id="step" class="subscription__steps-container">
+        <div id="step1" class="subscription__step">
             <span>1</span>
             <div>
                 <span><small>STEP 1</small></span>
                 <span><strong>YOUR INFO</strong></span>
             </div>
         </div>
-        <div class="subscription__step">
+        <div id="step2" class="subscription__step">
             <span>2</span>
             <div>
                 <span><small>STEP 2</small></span>
                 <span><strong>SELECT PLAN</strong></span>
             </div>
         </div>
-        <div class="subscription__step">
+        <div id="step3" class="subscription__step">
             <span>3</span>
             <div>
                 <span><small>STEP 3</small></span>
                 <span><strong>ADD-ONS</strong></span>
             </div>
         </div>
-        <div class="subscription__step">
+        <div id="step4" class="subscription__step">
             <span>4</span>
             <div>
                 <span><small>STEP 4</small></span>
@@ -37,13 +37,13 @@
             </div>
         </div>
     </section>
-    <section class="subscription__step-content">
-        <div style="display: none" id="step-1" class="subscription__step-card">
+    <section id="stepContent" class="subscription__step-content">
+        <div id="personalInfo" class="subscription__step-card">
             <header class="subscription__step-card-header">
                 <h1>Personal info</h1>
                 <p>Please provide your name, email address, and phone number.</p>
             </header>
-            <form action="#">
+            <form id="basicInfoForm" action="#">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input id="name" name="name" type="text" class="form-control" placeholder="e.g. Stephen King">
@@ -60,32 +60,32 @@
                 </div>
             </form>
             <footer class="subscription__step-card-footer">
-                <button id="nextStep1" class="subscription__button subscription__button--next">
+                <button id="nextStep1" type="button" class="subscription__button subscription__button--next">
                     <span>Next Step</span>
                 </button>
             </footer>
         </div>
-        <div style="display: none" id="step-2" class="subscription__step-card">
+        <div id="plans" class="subscription__step-card">
             <header class="subscription__step-card-header">
                 <h1>Select your plan</h1>
                 <p>You have the option of monthly or yearly billing.</p>
             </header>
             <div class="subscription__step-card-plans">
-                <div class="subscription__step-card-plan active subscription__step-card-plan--arcade">
+                <div class="subscription__step-card-plan">
                     <img src="assets/images/icon-arcade.svg" alt="Arcade plan representation icon">
                     <div class="subscription__plan-details">
                         <span>Arcade</span>
                         <span id="arcade-plan-price" class="price">$9/mo</span>
                     </div>
                 </div>
-                <div class="subscription__step-card-plan subscription__step-card-plan--advanced">
+                <div class="subscription__step-card-plan">
                     <img src="assets/images/icon-advanced.svg" alt="Advanced plan representation icon">
                     <div class="subscription__plan-details">
                         <span>Advanced</span>
                         <span id="advanced-plan-price" class="price">$12/mo</span>
                     </div>
                 </div>
-                <div class="subscription__step-card-plan subscription__step-card-plan--pro">
+                <div class="subscription__step-card-plan">
                     <img src="assets/images/icon-pro.svg" alt="Professional plan representation icon">
                     <div class="subscription__plan-details">
                         <span>Pro</span>
@@ -112,8 +112,7 @@
                 </button>
             </footer>
         </div>
-        <div style="display: none" id="step-3"
-             class="subscription__step-card subscription__step-card--reset-box-sizing">
+        <div id="addOns" class="subscription__step-card">
             <header class="subscription__step-card-header">
                 <h1>Pick add-ons</h1>
                 <p>Add-ons help enhance your gaming experience.</p>
@@ -155,7 +154,7 @@
                 </button>
             </footer>
         </div>
-        <div style="display: none" id="step-4" class="subscription__step-card">
+        <div id="finishingUp" class="subscription__step-card">
             <header class="subscription__step-card-header">
                 <h1>Finishing up</h1>
                 <p>Double-check everything looks OK before confirming</p>
@@ -197,7 +196,8 @@
                 </button>
             </footer>
         </div>
-        <div id="step-5" class="subscription__step-card subscription__step-card--custom-height">
+        <div id="thankYou"
+             class="subscription__step-card subscription__step-card--custom-height">
             <div class="subscription__thank-you-image">
                 <img src="assets/images/icon-thank-you.svg" alt="Thank you rendering image">
             </div>
@@ -214,10 +214,11 @@
         <button id="backStep" type="button" class="subscription__button subscription__button--back">
             <span>Go Back</span>
         </button>
-        <button id="nextStep" class="subscription__button subscription__button--next">
+        <button id="nextStep" type="button" class="subscription__button subscription__button--next">
             <span id="nextStepCaption">Next Step</span>
         </button>
     </section>
 </main>
+<script src="assets/js/index.js"></script>
 </body>
 </html>
