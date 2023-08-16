@@ -118,29 +118,29 @@
                 <p>Add-ons help enhance your gaming experience.</p>
             </header>
             <div class="subscription__step-card-add-ons">
-                <div class="subscription__step-add-on active">
-                    <input id="online-service" type="checkbox" checked>
+                <div class="subscription__step-add-on">
+                    <input id="online-service" type="checkbox" aria-labelledby="online-service-label">
                     <div class="subscription__step-add-on-details">
-                        <span>Online service</span>
+                        <span id="online-service-label">Online service</span>
                         <span><small>Access to multiplayer games</small></span>
                     </div>
-                    <span class="price price--add-on">+$10/mo</span>
-                </div>
-                <div class="subscription__step-add-on active">
-                    <input id="larger-storage" type="checkbox" checked>
-                    <div class="subscription__step-add-on-details">
-                        <span>Larger storage</span>
-                        <span><small>Extra 1TB of cloud save</small></span>
-                    </div>
-                    <span class="price price--add-on">+$12/mo</span>
+                    <span id="online-service-price" class="price price--add-on">+$1/mo</span>
                 </div>
                 <div class="subscription__step-add-on">
-                    <input id="customizable-profile" type="checkbox">
+                    <input id="larger-storage" type="checkbox" aria-labelledby="larger-storage-label">
                     <div class="subscription__step-add-on-details">
-                        <span>Customizable profile</span>
+                        <span id="larger-storage-label">Larger storage</span>
+                        <span><small>Extra 1TB of cloud save</small></span>
+                    </div>
+                    <span id="larger-storage-price" class="price price--add-on">+$2/mo</span>
+                </div>
+                <div class="subscription__step-add-on">
+                    <input id="customizable-profile" type="checkbox" aria-labelledby="customizable-profile-label">
+                    <div class="subscription__step-add-on-details">
+                        <span id="customizable-profile-label">Customizable profile</span>
                         <span><small>Custom theme on your profile</small></span>
                     </div>
-                    <span class="price price--add-on">+$20/mo</span>
+                    <span id="customizable-profile-price" class="price price--add-on">+$2/mo</span>
                 </div>
             </div>
             <footer class="subscription__step-card-footer">
