@@ -166,6 +166,7 @@ let CURRENT_STEP_INDEX = 0;
 
 const stepElement = document.querySelector('#step');
 const stepContentElement = document.querySelector('#stepContent');
+const stepNavigatorElement = document.querySelector('.subscription__step-navigator');
 const backStepButton = document.querySelector('#backStep');
 const nextStepButton = document.querySelector('#nextStep');
 
@@ -197,7 +198,15 @@ nextStepButton.addEventListener('click', event => {
 //// endregion
 
 //// region functions
-
+const createStrongElement = () => {
+    return document.createElement('strong');
+}
+const createSpanElement = () => {
+    return document.createElement('span');
+}
+const createDivElement = () => {
+    return document.createElement('div');
+}
 const clearAllActiveState = containerElement => {
     const children = Array.from(containerElement.children);
     const activatedChildren = children.filter(f => f.classList.contains('active'));
@@ -336,16 +345,18 @@ const invalidStep = () => {
             break;
         case stepContentOrder.PLANS:
             invalid = !SUBSCRIPTION_DATA.plan;
+
             if (!invalid) {
                 clearAllActiveState(plansElement);
-                initializeAddOnPrice();
+                initAddOnSelector();
+                initAddOnPrice();
             }
             break;
         case stepContentOrder.ADD_ONS:
-            //invalid = true;
+            initFinishingUpStep();
             break;
         case stepContentOrder.FINISHING_UP:
-            //invalid = true;
+            stepNavigatorElement.style.display = 'none';
             break;
     }
 
@@ -371,7 +382,8 @@ const setValuesForStep = () => {
             setActivatedState(planElement);
             break;
         case stepContentOrder.ADD_ONS:
-            initializeAddOnPrice();
+            initAddOnPrice();
+            initAddOnSelector();
             break;
     }
 }
@@ -417,6 +429,7 @@ switchPlanElement.addEventListener('change', event => {
 
     clearAllActiveState(plansElement);
     SUBSCRIPTION_DATA.plan = null;
+    SUBSCRIPTION_DATA.addOns = [];
 });
 
 //// endregion
@@ -494,7 +507,7 @@ const addAddOn = (addOn, event) => {
         SUBSCRIPTION_DATA.addOns = SUBSCRIPTION_DATA.addOns.filter(f => f.addOn !== addOn);
     }
 }
-const initializeAddOnPrice = () => {
+const initAddOnPrice = () => {
     if (!SUBSCRIPTION_DATA.plan) return;
     const {planType: selectedPlanType} = SUBSCRIPTION_DATA.plan;
 
@@ -513,6 +526,111 @@ const setAddOnPrice = (element, addOn, planType) => {
         planTypeAbbrev
     } = ADD_ONS_DATA.find(f => f.addOn === addOn && f.planType === planType);
     element.textContent = `${currency}${price}/${planTypeAbbrev}`;
+}
+const selectAddOn = (addOnElement, addOnName) => {
+    let selectedAddOn = SUBSCRIPTION_DATA.addOns.some(s => s.addOn === addOnName);
+    if (selectedAddOn) {
+        addOnElement.checked = selectedAddOn;
+        setActivatedState(addOnElement.parentElement);
+    } else {
+        addOnElement.checked = false;
+        clearActivatedState(addOnElement.parentElement);
+    }
+}
+const initAddOnSelector = () => {
+    selectAddOn(onlineServiceElement, addOn.ONLINE_SERVICE);
+    selectAddOn(largerStorageElement, addOn.LARGER_STORAGE);
+    selectAddOn(customizableProfileElement, addOn.CUSTOMIZABLE_PROFILE);
+}
+
+//// endregion
+
+/// endregion
+
+/// region finishing up
+
+//// region elements
+
+const changeLink = document.querySelector('#change-selected-plan');
+
+//// endregion
+
+//// region events
+
+changeLink.addEventListener('click', event => {
+    event.preventDefault();
+
+    CURRENT_STEP_INDEX = stepContentOrder.PLANS;
+    setValuesForStep();
+    showStepContent(STEP_CONTENT_ARRAY[CURRENT_STEP_INDEX]);
+});
+
+//// endregion
+
+//// region functions
+
+const setSummaryPlan = () => {
+    const selectedPlanElement = document.querySelector('#selected-plan');
+    const summaryPriceElement = document.querySelector('#summary-price');
+
+    const {plan, planType, currency, price, planTypeAbbrev} = SUBSCRIPTION_DATA.plan;
+
+    let strongElement = createStrongElement();
+    strongElement.textContent = `${plan} (${planType})`;
+
+    if (selectedPlanElement.childElementCount > 0)
+        selectedPlanElement.children[0].remove();
+
+    selectedPlanElement.append(strongElement);
+
+    strongElement = createStrongElement();
+    strongElement.textContent = `${currency}${price}/${planTypeAbbrev}`;
+
+    if (summaryPriceElement.childElementCount > 0)
+        summaryPriceElement.firstChild.remove();
+
+    summaryPriceElement.append(strongElement);
+}
+const listSelectedAddOns = () => {
+    const summaryAddOnsElement = document.querySelector('.subscription__summary-add-ons-selected');
+    while (summaryAddOnsElement.firstChild) {
+        summaryAddOnsElement.removeChild(summaryAddOnsElement.firstChild);
+    }
+    for (const addOn of SUBSCRIPTION_DATA.addOns) {
+        const {addOn: name, currency, price, planTypeAbbrev} = addOn;
+        const divElement = createDivElement();
+        const nameElement = createSpanElement();
+        nameElement.textContent = name;
+        const priceElement = createSpanElement();
+        priceElement.classList.add('price', 'price--summary');
+        priceElement.textContent = `+${currency}${price}/${planTypeAbbrev}`;
+        divElement.append(nameElement, priceElement);
+        summaryAddOnsElement.append(divElement);
+    }
+}
+const calculateTotal = () => {
+    let total = 0;
+    total = total + SUBSCRIPTION_DATA.plan.price;
+    const totalSelectedAddOns = SUBSCRIPTION_DATA.addOns.reduce((total, cV, _) => {
+        return total + cV.price;
+    }, 0);
+    total = total + totalSelectedAddOns;
+
+    const {planType: _planType, currency, planTypeAbbrev} = SUBSCRIPTION_DATA.plan;
+    const totalNameElement = document.querySelector('#summary-total-name');
+    const totalPlanType = _planType === planType.MONTHLY ? 'month' : 'year';
+    totalNameElement.textContent = `Total (per ${totalPlanType})`;
+    const totalPriceElement = document.querySelector('#summary-total-price');
+    if (totalPriceElement.firstChild)
+        totalPriceElement.removeChild(totalPriceElement.firstChild);
+    const strongElement = createStrongElement();
+    strongElement.textContent = `${currency}${total}/${planTypeAbbrev}`;
+    totalPriceElement.append(strongElement);
+}
+const initFinishingUpStep = () => {
+    setSummaryPlan();
+    listSelectedAddOns();
+    calculateTotal();
 }
 
 //// endregion
