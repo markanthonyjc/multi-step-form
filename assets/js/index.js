@@ -2,46 +2,90 @@
 
 const PLAN_PRICE_DATA = [
     {
-        plan: 'arcade',
-        planType: 'monthly',
+        plan: 'Arcade',
+        planType: 'Monthly',
         planTypeAbbrev: 'mo',
         currency: '$',
         price: 9
     },
     {
-        plan: 'advanced',
-        planType: 'monthly',
+        plan: 'Advanced',
+        planType: 'Monthly',
         planTypeAbbrev: 'mo',
         currency: '$',
         price: 12
     },
     {
-        plan: 'pro',
-        planType: 'monthly',
+        plan: 'Pro',
+        planType: 'Monthly',
         planTypeAbbrev: 'mo',
         currency: '$',
         price: 15
     },
     {
-        plan: 'arcade',
-        planType: 'yearly',
+        plan: 'Arcade',
+        planType: 'Yearly',
         planTypeAbbrev: 'yr',
         currency: '$',
         price: 90
     },
     {
-        plan: 'advanced',
-        planType: 'yearly',
+        plan: 'Advanced',
+        planType: 'Yearly',
         planTypeAbbrev: 'yr',
         currency: '$',
         price: 120
     },
     {
-        plan: 'pro',
-        planType: 'yearly',
+        plan: 'Pro',
+        planType: 'Yearly',
         planTypeAbbrev: 'yr',
         currency: '$',
         price: 150
+    }
+];
+const ADD_ONS_DATA = [
+    {
+        addOn: 'Online service',
+        planType: 'Monthly',
+        planTypeAbbrev: 'mo',
+        currency: '$',
+        price: 1
+    },
+    {
+        addOn: 'Larger storage',
+        planType: 'Monthly',
+        planTypeAbbrev: 'mo',
+        currency: '$',
+        price: 2
+    },
+    {
+        addOn: 'Customizable profile',
+        planType: 'Monthly',
+        planTypeAbbrev: 'mo',
+        currency: '$',
+        price: 2
+    },
+    {
+        addOn: 'Online service',
+        planType: 'Yearly',
+        planTypeAbbrev: 'yr',
+        currency: '$',
+        price: 10
+    },
+    {
+        addOn: 'Larger storage',
+        planType: 'Yearly',
+        planTypeAbbrev: 'yr',
+        currency: '$',
+        price: 20
+    },
+    {
+        addOn: 'Customizable profile',
+        planType: 'Yearly',
+        planTypeAbbrev: 'yr',
+        currency: '$',
+        price: 20
     }
 ];
 const SUBSCRIPTION_DATA = {
@@ -72,27 +116,32 @@ const modifierSelectors = {
     STEP_SELECTED: 'subscription__step--selected'
 };
 const plan = {
-    ARCADE: 'arcade',
-    ADVANCED: 'advanced',
-    PRO: 'pro'
-}
+    ARCADE: 'Arcade',
+    ADVANCED: 'Advanced',
+    PRO: 'Pro'
+};
 const planType = {
-    MONTHLY: 'monthly',
-    YEARLY: 'yearly'
-}
+    MONTHLY: 'Monthly',
+    YEARLY: 'Yearly'
+};
 const planId = {
     ARCADE_PLAN: 'arcade-plan',
     ADVANCED_PLAN: 'advanced-plan',
     PRO_PLAN: 'pro-plan'
-}
+};
 const planIdMap = {
     [plan.ARCADE]: planId.ARCADE_PLAN,
     [plan.ADVANCED]: planId.ADVANCED_PLAN,
     [plan.PRO]: planId.PRO_PLAN
+};
+const addOn = {
+    ONLINE_SERVICE: 'Online service',
+    LARGER_STORAGE: 'Larger storage',
+    CUSTOMIZABLE_PROFILE: 'Customizable profile'
 }
 // endregion
 
-// region global objects
+// region objects
 
 const STEP_CONTENT_ARRAY = Object.values(stepContent);
 const INVALID_REQUIRED_VALUE = {
@@ -149,6 +198,19 @@ nextStepButton.addEventListener('click', event => {
 
 //// region functions
 
+const clearAllActiveState = containerElement => {
+    const children = Array.from(containerElement.children);
+    const activatedChildren = children.filter(f => f.classList.contains('active'));
+    for (const child of activatedChildren) {
+        child.classList.remove('active');
+    }
+}
+const clearActivatedState = element => {
+    element.classList.remove('active');
+}
+const setActivatedState = element => {
+    element.classList.add('active');
+}
 const removeStepSelectedClass = () => {
     const children = Array.from(stepElement.children);
     const childrenWithSelectedClass = children.filter(f => f.classList.contains(modifierSelectors.STEP_SELECTED));
@@ -180,10 +242,8 @@ const showStepContent = name => {
 const toggleButtonVisibility = (element, show) => element.style.visibility = show ? 'visible' : 'hidden';
 const initializeStepContent = () => {
     hideAllStepContents();
-    //stepContentElement.children[stepContent.PERSONAL_INFO].classList.add('shown');
-    stepContentElement.children[stepContent.PLANS].classList.add('shown');
-    //CURRENT_STEP_INDEX = 0;
-    CURRENT_STEP_INDEX = 1;
+    stepContentElement.children[stepContent.PERSONAL_INFO].classList.add('shown');
+    CURRENT_STEP_INDEX = 0;
     addStepSelectedClass();
 
     toggleButtonVisibility(backStepButton, false);
@@ -193,7 +253,7 @@ const initializeStepContent = () => {
 
 /// endregion
 
-/// region personal info functions
+/// region personal info
 
 //// region elements
 
@@ -276,8 +336,10 @@ const invalidStep = () => {
             break;
         case stepContentOrder.PLANS:
             invalid = !SUBSCRIPTION_DATA.plan;
-            if (!invalid)
+            if (!invalid) {
                 clearAllActiveState(plansElement);
+                initializeAddOnPrice();
+            }
             break;
         case stepContentOrder.ADD_ONS:
             //invalid = true;
@@ -294,7 +356,7 @@ const setValuesForStep = () => {
         case stepContentOrder.PERSONAL_INFO:
             if (!SUBSCRIPTION_DATA.personalInfo) return;
 
-            const { name, emailAddress, phoneNumber } = SUBSCRIPTION_DATA.personalInfo;
+            const {name, emailAddress, phoneNumber} = SUBSCRIPTION_DATA.personalInfo;
             basicInfoForm.elements.name.value = name;
             basicInfoForm.elements.emailAddress.value = emailAddress;
             basicInfoForm.elements.phoneNumber.value = phoneNumber;
@@ -302,14 +364,14 @@ const setValuesForStep = () => {
             break;
         case stepContentOrder.PLANS:
             if (!SUBSCRIPTION_DATA.plan) return;
-            const { plan: selectedPlan } = SUBSCRIPTION_DATA.plan;
+            const {plan: selectedPlan} = SUBSCRIPTION_DATA.plan;
             const planElementId = planIdMap[selectedPlan];
-            const child = plansElement.children[planElementId];
+            const planElement = plansElement.children[planElementId];
 
-            setActivatedState(child);
+            setActivatedState(planElement);
             break;
         case stepContentOrder.ADD_ONS:
-
+            initializeAddOnPrice();
             break;
     }
 }
@@ -318,7 +380,7 @@ const setValuesForStep = () => {
 
 /// endregion
 
-// region plans functions
+/// region plans
 
 //// region elements
 
@@ -330,12 +392,13 @@ const switchPlanElement = document.querySelector('#switch-plan');
 //// region events
 
 plansElement.addEventListener('click', event => {
-    event.stopPropagation();
-    if (!event.target.classList.contains('subscription__step-card-plan')) return;
+    const planElement = event.target.closest('.subscription__step-card-plan');
 
-    clearAllActiveState(plansElement);
-    setActivatedState(event.target);
-    getSelectedPlan(event.target);
+    if (planElement) {
+        clearAllActiveState(plansElement);
+        setActivatedState(planElement);
+        getSelectedPlan(planElement);
+    }
 });
 switchPlanElement.addEventListener('change', event => {
     const arcadePlanPrice = document.querySelector('#arcade-plan-price');
@@ -351,22 +414,15 @@ switchPlanElement.addEventListener('change', event => {
         changePlanPrice(advancedPlanPrice, planType.MONTHLY, plan.ADVANCED);
         changePlanPrice(proPlanPrice, planType.MONTHLY, plan.PRO);
     }
+
+    clearAllActiveState(plansElement);
+    SUBSCRIPTION_DATA.plan = null;
 });
 
 //// endregion
 
 /// region functions
 
-const clearAllActiveState = containerElement => {
-    const children = Array.from(containerElement.children);
-    const activatedChildren = children.filter(f => f.classList.contains('active'));
-    for (const child of activatedChildren) {
-        child.classList.remove('active');
-    }
-}
-const setActivatedState = element => {
-    element.classList.add('active');
-}
 const changePlanPrice = (element, planType, plan) => {
     const plans = PLAN_PRICE_DATA.filter(f => f.planType === planType);
     const {currency, price, planTypeAbbrev} = plans.find(f => f.plan === plan);
@@ -374,23 +430,94 @@ const changePlanPrice = (element, planType, plan) => {
 }
 const getSelectedPlan = element => {
     SUBSCRIPTION_DATA.plan = null;
-    const _planType = element.checked ? planType.YEARLY : planType.MONTHLY;
+    const selectedPlanType = document.querySelector('#switch-plan').checked ?
+        planType.YEARLY : planType.MONTHLY;
     switch (element.id) {
         case planId.ARCADE_PLAN:
-            SUBSCRIPTION_DATA.plan = PLAN_PRICE_DATA.find(f => f.plan === plan.ARCADE && f.planType === _planType);
+            SUBSCRIPTION_DATA.plan = PLAN_PRICE_DATA.find(f => f.plan === plan.ARCADE && f.planType === selectedPlanType);
             break;
         case planId.ADVANCED_PLAN:
-            SUBSCRIPTION_DATA.plan = PLAN_PRICE_DATA.find(f => f.plan === plan.ADVANCED && f.planType === _planType);
+            SUBSCRIPTION_DATA.plan = PLAN_PRICE_DATA.find(f => f.plan === plan.ADVANCED && f.planType === selectedPlanType);
             break;
         case planId.PRO_PLAN:
-            SUBSCRIPTION_DATA.plan = PLAN_PRICE_DATA.find(f => f.plan === plan.PRO && f.planType === _planType);
+            SUBSCRIPTION_DATA.plan = PLAN_PRICE_DATA.find(f => f.plan === plan.PRO && f.planType === selectedPlanType);
             break;
     }
 }
 
 /// endregion
 
-// endregion
+/// endregion
+
+/// region pick add-ons
+
+//// region elements
+
+const onlineServiceElement = document.querySelector('#online-service');
+const largerStorageElement = document.querySelector('#larger-storage');
+const customizableProfileElement = document.querySelector('#customizable-profile');
+
+//// endregion
+
+//// region events
+
+onlineServiceElement.addEventListener('change', event => {
+    handleCheckboxChange(event);
+    addAddOn(addOn.ONLINE_SERVICE, event);
+});
+largerStorageElement.addEventListener('change', event => {
+    handleCheckboxChange(event);
+    addAddOn(addOn.LARGER_STORAGE, event);
+});
+customizableProfileElement.addEventListener('change', event => {
+    handleCheckboxChange(event);
+    addAddOn(addOn.CUSTOMIZABLE_PROFILE, event);
+});
+
+//// endregion
+
+//// region functions
+
+const handleCheckboxChange = event => {
+    if (event.target.checked)
+        setActivatedState(event.target.parentElement);
+    else
+        clearActivatedState(event.target.parentElement);
+}
+const addAddOn = (addOn, event) => {
+    if (event.target.checked) {
+        const selectedPlanType = SUBSCRIPTION_DATA.plan.planType;
+        const _addOn = ADD_ONS_DATA.find(f => f.addOn === addOn && f.planType === selectedPlanType);
+        if (!SUBSCRIPTION_DATA.addOns.some(s => s.addOn === addOn))
+            SUBSCRIPTION_DATA.addOns.push(_addOn);
+    } else {
+        SUBSCRIPTION_DATA.addOns = SUBSCRIPTION_DATA.addOns.filter(f => f.addOn !== addOn);
+    }
+}
+const initializeAddOnPrice = () => {
+    if (!SUBSCRIPTION_DATA.plan) return;
+    const {planType: selectedPlanType} = SUBSCRIPTION_DATA.plan;
+
+    const onlineServicePrice = document.querySelector('#online-service-price');
+    const largerStoragePrice = document.querySelector('#larger-storage-price');
+    const customizableProfilePrice = document.querySelector('#customizable-profile-price');
+
+    setAddOnPrice(onlineServicePrice, addOn.ONLINE_SERVICE, selectedPlanType);
+    setAddOnPrice(largerStoragePrice, addOn.LARGER_STORAGE, selectedPlanType);
+    setAddOnPrice(customizableProfilePrice, addOn.CUSTOMIZABLE_PROFILE, selectedPlanType);
+}
+const setAddOnPrice = (element, addOn, planType) => {
+    const {
+        currency,
+        price,
+        planTypeAbbrev
+    } = ADD_ONS_DATA.find(f => f.addOn === addOn && f.planType === planType);
+    element.textContent = `${currency}${price}/${planTypeAbbrev}`;
+}
+
+//// endregion
+
+/// endregion
 
 // start
 
