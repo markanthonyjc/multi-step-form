@@ -96,6 +96,15 @@ body {
     border-color: hsl(354, 84%, 57%);
 }
 
+.invalid-message {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: hsl(354, 84%, 57%);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
 /* endregion */
 
 /* region switch */
