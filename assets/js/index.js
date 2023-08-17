@@ -139,24 +139,26 @@ const addOn = {
     LARGER_STORAGE: 'Larger storage',
     CUSTOMIZABLE_PROFILE: 'Customizable profile'
 }
+
 // endregion
 
 // region objects
 
 const STEP_CONTENT_ARRAY = Object.values(stepContent);
-const INVALID_REQUIRED_VALUE = {
-    message: 'This field is required',
-    class: 'invalid-control',
-    style: {
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        color: 'hsl(354, 84%, 57%)',
-        fontSize: '0.8rem',
-        fontWeight: '500'
+const INVALID_MESSAGE = {
+    message: {
+        required: 'This field is required',
+        email: 'Invalid email'
+    },
+    class: {
+        parent: 'invalid-control',
+        message: 'invalid-message'
     }
 };
 let CURRENT_STEP_INDEX = 0;
+const REGEX = {
+    email: new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')
+};
 
 // endregion
 
@@ -198,6 +200,7 @@ nextStepButton.addEventListener('click', event => {
 //// endregion
 
 //// region functions
+
 const createStrongElement = () => {
     return document.createElement('strong');
 }
@@ -266,7 +269,7 @@ const initializeStepContent = () => {
 
 //// region elements
 
-const basicInfoForm = stepContentElement.children[stepContent.PERSONAL_INFO].querySelector('#basicInfoForm');
+const basicInfoForm = document.querySelector('#basicInfoForm');
 
 //// endregion
 
@@ -275,9 +278,13 @@ const basicInfoForm = stepContentElement.children[stepContent.PERSONAL_INFO].que
 for (const element of basicInfoForm.elements) {
     element.addEventListener('keyup', event => {
         if (!event.target.value)
-            setInvalidStateToControl(event.target);
-        else
-            clearControlInvalidState(event.target)
+            setInvalidStateToControl(event.target, INVALID_MESSAGE.message.required);
+        else {
+            if (event.target.id === 'email-address' && !REGEX.email.test(event.target.value))
+                setInvalidStateToControl(event.target, INVALID_MESSAGE.message.email);
+            else
+                clearControlInvalidState(event.target);
+        }
     });
 }
 
@@ -285,30 +292,29 @@ for (const element of basicInfoForm.elements) {
 
 //// region functions
 
-const createInvalidElement = () => {
-    const invalidContainer = document.createElement('div');
-    const invalidMessage = document.createElement('span');
-    invalidMessage.innerText = INVALID_REQUIRED_VALUE.message;
-    const {position, top, right, color, fontSize, fontWeight} = INVALID_REQUIRED_VALUE.style;
-    invalidMessage.style.position = position;
-    invalidMessage.style.top = top;
-    invalidMessage.style.right = right;
-    invalidMessage.style.color = color;
-    invalidMessage.style.fontSize = fontSize;
-    invalidMessage.style.fontWeight = fontWeight;
+const createInvalidElement = (message) => {
+    const invalidContainer = createDivElement();
+    const invalidMessage = createSpanElement();
+    invalidMessage.innerText = message;
+    invalidMessage.classList.add(INVALID_MESSAGE.class.message)
     invalidContainer.append(invalidMessage);
 
     return invalidContainer;
 }
-const setInvalidStateToControl = inputElement => {
-    const invalidContainer = createInvalidElement();
+const setInvalidStateToControl = (inputElement, message) => {
+    const invalidContainerElement = createInvalidElement(message);
+
     const parentElement = inputElement.parentElement;
-    parentElement.append(invalidContainer);
+    const divElement = parentElement.querySelector('div');
+    if (divElement)
+        parentElement.removeChild(divElement);
+    parentElement.append(invalidContainerElement);
     parentElement.style.position = 'relative';
-    inputElement.classList.add(INVALID_REQUIRED_VALUE.class);
+
+    inputElement.classList.add(INVALID_MESSAGE.class.parent);
 }
 const clearControlInvalidState = inputElement => {
-    inputElement.classList.remove(INVALID_REQUIRED_VALUE.class);
+    inputElement.classList.remove(INVALID_MESSAGE.class.parent);
     const parentElement = inputElement.parentElement;
     const invalidContainer = parentElement.querySelector('div');
     if (invalidContainer)
@@ -326,10 +332,12 @@ const invalidStep = () => {
         case stepContentOrder.PERSONAL_INFO:
             clearAllInvalidState(basicInfoForm.elements);
 
+            const {required, email} = INVALID_MESSAGE.message;
             const {name, emailAddress, phoneNumber} = basicInfoForm.elements;
-            if (name.value === "") setInvalidStateToControl(name)
-            if (emailAddress.value === "") setInvalidStateToControl(emailAddress);
-            if (phoneNumber.value === "") setInvalidStateToControl(phoneNumber);
+            if (name.value === "") setInvalidStateToControl(name, required)
+            if (emailAddress.value === "") setInvalidStateToControl(emailAddress, required);
+            else if (!REGEX.email.test(emailAddress.value)) setInvalidStateToControl(emailAddress, email);
+            if (phoneNumber.value === "") setInvalidStateToControl(phoneNumber, required);
 
             invalid = !name.value || !emailAddress.value || !phoneNumber.value;
 
