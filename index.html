@@ -9,28 +9,28 @@
 <main class="subscription">
     <section id="step" class="subscription__steps-container">
         <div id="step1" class="subscription__step">
-            <span>1</span>
+            <span class="subscription__step-number">1</span>
             <div>
                 <span><small>STEP 1</small></span>
                 <span><strong>YOUR INFO</strong></span>
             </div>
         </div>
         <div id="step2" class="subscription__step">
-            <span>2</span>
+            <span class="subscription__step-number">2</span>
             <div>
                 <span><small>STEP 2</small></span>
                 <span><strong>SELECT PLAN</strong></span>
             </div>
         </div>
         <div id="step3" class="subscription__step">
-            <span>3</span>
+            <span class="subscription__step-number">3</span>
             <div>
                 <span><small>STEP 3</small></span>
                 <span><strong>ADD-ONS</strong></span>
             </div>
         </div>
         <div id="step4" class="subscription__step">
-            <span>4</span>
+            <span class="subscription__step-number">4</span>
             <div>
                 <span><small>STEP 4</small></span>
                 <span><strong>SUMMARY</strong></span>
@@ -59,8 +59,8 @@
                            placeholder="e.g. +1 234 567 890">
                 </div>
             </form>
-            <footer class="subscription__step-card-footer">
-                <button id="nextStep1" type="button" class="subscription__button subscription__button--next">
+            <footer class="subscription__step-card-navigator subscription__step-card-navigator--item-right-position">
+                <button type="button" class="subscription__button subscription__button--next">
                     <span>Next Step</span>
                 </button>
             </footer>
@@ -70,26 +70,31 @@
                 <h1>Select your plan</h1>
                 <p>You have the option of monthly or yearly billing.</p>
             </header>
-            <div class="subscription__step-card-plans">
-                <div id="arcade-plan" class="subscription__step-card-plan">
-                    <img src="assets/images/icon-arcade.svg" alt="Arcade plan representation icon">
-                    <div class="subscription__plan-details">
-                        <span>Arcade</span>
-                        <span id="arcade-plan-price" class="price">$9/mo</span>
+            <div class="subscription__step-card-plans-container">
+                <div class="subscription__step-card-plans">
+                    <div id="arcade-plan" class="subscription__step-card-plan">
+                        <img src="assets/images/icon-arcade.svg" alt="Arcade plan representation icon">
+                        <div class="subscription__plan-details">
+                            <span>Arcade</span>
+                            <span id="arcade-plan-price" class="price">$9/mo</span>
+                            <span class="free-plan-info">2 months free</span>
+                        </div>
                     </div>
-                </div>
-                <div id="advanced-plan" class="subscription__step-card-plan">
-                    <img src="assets/images/icon-advanced.svg" alt="Advanced plan representation icon">
-                    <div class="subscription__plan-details">
-                        <span>Advanced</span>
-                        <span id="advanced-plan-price" class="price">$12/mo</span>
+                    <div id="advanced-plan" class="subscription__step-card-plan">
+                        <img src="assets/images/icon-advanced.svg" alt="Advanced plan representation icon">
+                        <div class="subscription__plan-details">
+                            <span>Advanced</span>
+                            <span id="advanced-plan-price" class="price">$12/mo</span>
+                            <span class="free-plan-info">2 months free</span>
+                        </div>
                     </div>
-                </div>
-                <div id="pro-plan" class="subscription__step-card-plan">
-                    <img src="assets/images/icon-pro.svg" alt="Professional plan representation icon">
-                    <div class="subscription__plan-details">
-                        <span>Pro</span>
-                        <span id="pro-plan-price" class="price">$15/mo</span>
+                    <div id="pro-plan" class="subscription__step-card-plan">
+                        <img src="assets/images/icon-pro.svg" alt="Professional plan representation icon">
+                        <div class="subscription__plan-details">
+                            <span>Pro</span>
+                            <span id="pro-plan-price" class="price">$15/mo</span>
+                            <span class="free-plan-info">2 months free</span>
+                        </div>
                     </div>
                 </div>
                 <div class="subscription__step-card-plan-type">
@@ -101,13 +106,11 @@
                     <span class="yearly-rate">Yearly</span>
                 </div>
             </div>
-            <footer class="subscription__step-card-footer">
-                <button id="backStepSP" type="button"
-                        class="subscription__button subscription__button--back">
+            <footer class="subscription__step-card-navigator">
+                <button type="button" class="subscription__button subscription__button--back">
                     <span>Go Back</span>
                 </button>
-                <button id="nextStepSP" type="button"
-                        class="subscription__button subscription__button--next">
+                <button type="button" class="subscription__button subscription__button--next">
                     <span>Next Step</span>
                 </button>
             </footer>
@@ -143,12 +146,12 @@
                     <span id="customizable-profile-price" class="price price--add-on">+$2/mo</span>
                 </div>
             </div>
-            <footer class="subscription__step-card-footer">
-                <button id="backStepPA" type="button"
+            <footer class="subscription__step-card-navigator">
+                <button type="button"
                         class="subscription__button subscription__button subscription__button subscription__button--back">
                     <span>Go Back</span>
                 </button>
-                <button id="nextStepPA" type="button"
+                <button type="button"
                         class="subscription__button subscription__button subscription__button subscription__button--next">
                     <span>Next Step</span>
                 </button>
@@ -178,12 +181,12 @@
                     <span id="summary-total-price" class="price price--summary-total"><strong>+$12/mo</strong></span>
                 </div>
             </div>
-            <footer class="subscription__step-card-footer">
-                <button id="backStepFU" type="button"
+            <footer class="subscription__step-card-navigator">
+                <button type="button"
                         class="subscription__button subscription__button subscription__button subscription__button--back">
                     <span>Go Back</span>
                 </button>
-                <button id="nextStepFU" type="button"
+                <button type="button"
                         class="subscription__button subscription__button subscription__button subscription__button--next">
                     <span>Next Step</span>
                 </button>
