@@ -1,5 +1,3 @@
-/* region global */
-
 @font-face {
     font-family: Ubuntu;
     src: url("/assets/fonts/Ubuntu-Regular.ttf");
@@ -25,7 +23,6 @@
 }
 
 body {
-    /*max-width: 100vw;*/
     display: flex;
     flex-direction: column;
 
@@ -46,12 +43,7 @@ body {
     }
 }
 
-/* endregion */
-
-/* region main Layout */
-
 .subscription {
-    /*position: relative;*/
     display: flex;
     flex-direction: column;
     margin-bottom: 5rem;
@@ -59,7 +51,6 @@ body {
 
 @media (min-width: 768px) {
     .subscription {
-        /*position: initial;*/
         flex-direction: row;
         background-color: hsl(0, 0%, 100%);
         margin-bottom: initial;
@@ -69,10 +60,6 @@ body {
         max-width: 900px;
     }
 }
-
-/* endregion */
-
-/* region from group */
 
 .form-group {
     display: flex;
@@ -95,10 +82,6 @@ body {
         margin-bottom: 10px;
     }
 }
-
-/* endregion */
-
-/* region form control*/
 
 .form-control {
     border: 1px solid hsl(229, 24%, 87%);
@@ -150,10 +133,6 @@ body {
     }
 }
 
-/* endregion */
-
-/* region switch */
-
 .switch-control {
     position: relative;
 }
@@ -189,10 +168,6 @@ body {
     transition: all .4s ease-in-out;
 }
 
-/* endregion */
-
-/* region price */
-
 .price {
     color: hsl(231, 11%, 63%);
     font-size: 0.9rem;
@@ -210,19 +185,11 @@ body {
     color: hsl(243, 100%, 62%);
 }
 
-/* endregion */
-
-/* region hr */
-
 hr {
     height: 1px;
     background-color: hsl(229, 24%, 87%);
     border: none;
 }
-
-/* endregion */
-
-/* region steps */
 
 .subscription__steps-container {
     display: flex;
@@ -236,6 +203,8 @@ hr {
     background-size: cover;
 
     height: 175px;
+
+    transition: height 0.5s ease-in-out;
 }
 
 .subscription__step {
@@ -307,18 +276,6 @@ hr {
     }
 }
 
-/* endregion */
-
-/* region step content */
-
-/*.subscription__step-content {*/
-    /*display: flex;*/
-    /*flex-direction: column;*/
-    /*justify-content: center;*/
-    /*align-items: center;*/
-    /*margin-bottom: 75px;*/
-/*}*/
-
 @media (min-width: 768px) {
     .subscription__step-content {
         flex-grow: 1;
@@ -328,10 +285,6 @@ hr {
         padding: 1rem;
     }
 }
-
-/* endregion */
-
-/* region step navigator and buttons */
 
 .subscription__step-navigator {
     background-color: hsl(0, 0%, 100%);
@@ -402,10 +355,6 @@ hr {
     }
 }
 
-/* endregion */
-
-/* region step card */
-
 .subscription__step-card {
     display: flex;
     flex-direction: column;
@@ -414,6 +363,7 @@ hr {
     padding: 1.5rem;
     margin: -4rem 1rem 0 1rem;
     border-radius: 10px;
+    animation: show-effect 1s;
 }
 
 .subscription__step-card > * {
@@ -469,10 +419,6 @@ hr {
         justify-content: right;
     }
 }
-
-/* endregion */
-
-/* region plan selector */
 
 .subscription__step-card-plans {
     display: flex;
@@ -573,10 +519,6 @@ hr {
     }
 }
 
-/* endregion */
-
-/* region pick add-ons */
-
 .subscription__step-card-add-ons {
     display: flex;
     flex-direction: column;
@@ -667,19 +609,11 @@ hr {
     color: hsl(231, 11%, 63%);
 }
 
-/* endregion */
-
-/* region state */
-
 .active {
     border-color: hsl(243, 100%, 62%);
     background-color: hsla(243, 100%, 62%, 0.05);
     cursor: pointer;
 }
-
-/* endregion */
-
-/* region finishing up */
 
 .subscription__step-card-summary {
     display: flex;
@@ -755,10 +689,6 @@ hr {
     color: hsl(231, 11%, 63%);
 }
 
-/* endregion */
-
-/* region thank you*/
-
 .subscription__step-card--custom-height {
     display: flex;
     flex-direction: column;
@@ -793,4 +723,14 @@ hr {
     line-height: 1.5rem;
 }
 
-/* endregion */
+@keyframes show-effect {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
