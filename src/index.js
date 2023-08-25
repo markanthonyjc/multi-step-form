@@ -113,7 +113,9 @@ const stepContentOrder = {
     THANK_YOU: 4
 };
 const modifierSelectors = {
-    STEP_SELECTED: 'subscription__step-number--selected'
+    STEP_SELECTED: 'subscription__step-number--selected',
+    BUTTON_NEXT : 'subscription__button--next',
+    BUTTON_CONFIRM : 'subscription__button--confirm'
 };
 const plan = {
     ARCADE: 'Arcade',
@@ -139,7 +141,10 @@ const addOn = {
     LARGER_STORAGE: 'Larger storage',
     CUSTOMIZABLE_PROFILE: 'Customizable profile'
 }
-
+const nextButtonText = {
+    NEXT_STEP: 'Next Step',
+    CONFIRM: 'Confirm'
+}
 // endregion
 
 // region objects
@@ -193,7 +198,7 @@ function handleStepNavigatorClick(event) {
     if (!button) return;
     if (button.classList.contains('subscription__button--back')) {
         handleBackStepButtonClick();
-    } else if (button.classList.contains('subscription__button--next')) {
+    } else if (button.classList.contains('subscription__button--next') || button.classList.contains('subscription__button--confirm')) {
         handleNextStepButtonClick();
     }
 }
@@ -203,6 +208,7 @@ const handleBackStepButtonClick = () => {
     CURRENT_STEP_INDEX--;
     if (CURRENT_STEP_INDEX === 0) toggleButtonVisibility(backStepButton, false);
     setValuesForStep();
+    toggleNextButtonState(document.querySelector('#nextStep'), modifierSelectors.BUTTON_CONFIRM, modifierSelectors.BUTTON_NEXT, nextButtonText.NEXT_STEP);
     showStepContent(STEP_CONTENT_ARRAY[CURRENT_STEP_INDEX]);
 }
 const handleNextStepButtonClick = () => {
@@ -340,6 +346,11 @@ const clearAllInvalidState = formElements => {
         clearControlInvalidState(element);
     }
 }
+const toggleNextButtonState = (buttonElement, currentClass, newClass, text) => {
+    buttonElement.classList.remove(currentClass);
+    buttonElement.classList.add(newClass);
+    buttonElement.children[0].textContent = text;
+}
 const invalidStep = () => {
     let invalid = false;
 
@@ -376,6 +387,11 @@ const invalidStep = () => {
             }
             break;
         case stepContentOrder.ADD_ONS:
+            toggleNextButtonState(
+                document.querySelector('#nextStep'),
+                modifierSelectors.BUTTON_NEXT,
+                modifierSelectors.BUTTON_CONFIRM,
+                nextButtonText.CONFIRM);
             initFinishingUpStep();
             break;
         case stepContentOrder.FINISHING_UP:
