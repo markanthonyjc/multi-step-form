@@ -2,18 +2,21 @@
     font-family: Ubuntu;
     src: url("/assets/fonts/Ubuntu-Regular.ttf");
     font-weight: normal;
+    font-display: swap
 }
 
 @font-face {
     font-family: Ubuntu;
     src: url("/assets/fonts/Ubuntu-Medium.ttf");
     font-weight: 500;
+    font-display: swap
 }
 
 @font-face {
     font-family: Ubuntu;
     src: url("/assets/fonts/Ubuntu-Bold.ttf");
     font-weight: bold;
+    font-display: swap
 }
 
 * {
@@ -363,7 +366,7 @@ hr {
     padding: 1.5rem;
     margin: -4rem 1rem 0 1rem;
     border-radius: 10px;
-    animation: show-effect 1s;
+    animation: show-effect 0.5s;
 }
 
 .subscription__step-card > * {
