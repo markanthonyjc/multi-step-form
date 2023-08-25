@@ -4,7 +4,7 @@
   "description": "Subscription form step by step",
   "main": "index.js",
   "scripts": {
-    "start": "servor build --browse --reload",
+    "start": "servor docs --browse --reload",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production",
     "dev": "webpack --mode development"
