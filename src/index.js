@@ -113,7 +113,9 @@ const stepContentOrder = {
     THANK_YOU: 4
 };
 const modifierSelectors = {
-    STEP_SELECTED: 'subscription__step--selected'
+    STEP_SELECTED: 'subscription__step-number--selected',
+    BUTTON_NEXT : 'subscription__button--next',
+    BUTTON_CONFIRM : 'subscription__button--confirm'
 };
 const plan = {
     ARCADE: 'Arcade',
@@ -139,7 +141,10 @@ const addOn = {
     LARGER_STORAGE: 'Larger storage',
     CUSTOMIZABLE_PROFILE: 'Customizable profile'
 }
-
+const nextButtonText = {
+    NEXT_STEP: 'Next Step',
+    CONFIRM: 'Confirm'
+}
 // endregion
 
 // region objects
@@ -157,7 +162,7 @@ const INVALID_MESSAGE = {
 };
 let CURRENT_STEP_INDEX = 0;
 const REGEX = {
-    email: new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')
+    email: new RegExp('^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$')
 };
 
 // endregion
@@ -170,37 +175,49 @@ const stepElement = document.querySelector('#step');
 const stepContentElement = document.querySelector('#stepContent');
 const stepNavigatorElement = document.querySelector('.subscription__step-navigator');
 const backStepButton = document.querySelector('#backStep');
-const nextStepButton = document.querySelector('#nextStep');
 
 //// endregion
 
 //// region events
+const navigationElements = Array.from(stepContentElement.children)
+    .map(m => m.children) // get step content
+    .map(m => m[2]) // get footer elements
+    .filter(f => f); // remove empty
+for (const element of navigationElements) {
+    element.addEventListener('click', handleStepNavigatorClick);
+}
 
-backStepButton.addEventListener('click', event => {
-    event.preventDefault();
-
-    if (CURRENT_STEP_INDEX === 0) {
-        toggleButtonVisibility(backStepButton, false);
-        return;
-    }
-    CURRENT_STEP_INDEX--;
-    setValuesForStep();
-    showStepContent(STEP_CONTENT_ARRAY[CURRENT_STEP_INDEX]);
-});
-nextStepButton.addEventListener('click', event => {
-    event.preventDefault();
-
-    if (CURRENT_STEP_INDEX === STEP_CONTENT_ARRAY.length - 1) return;
-    if (invalidStep()) return;
-    CURRENT_STEP_INDEX++;
-    toggleButtonVisibility(backStepButton, true);
-    showStepContent(STEP_CONTENT_ARRAY[CURRENT_STEP_INDEX]);
-});
+stepNavigatorElement.addEventListener('click', handleStepNavigatorClick);
 
 //// endregion
 
 //// region functions
 
+function handleStepNavigatorClick(event) {
+    const button = event.target.closest('.subscription__button');
+    if (!button) return;
+    if (button.classList.contains('subscription__button--back')) {
+        handleBackStepButtonClick();
+    } else if (button.classList.contains('subscription__button--next') || button.classList.contains('subscription__button--confirm')) {
+        handleNextStepButtonClick();
+    }
+}
+
+const handleBackStepButtonClick = () => {
+    if (CURRENT_STEP_INDEX === 0) return;
+    CURRENT_STEP_INDEX--;
+    if (CURRENT_STEP_INDEX === 0) toggleButtonVisibility(backStepButton, false);
+    setValuesForStep();
+    toggleNextButtonState(document.querySelector('#nextStep'), modifierSelectors.BUTTON_CONFIRM, modifierSelectors.BUTTON_NEXT, nextButtonText.NEXT_STEP);
+    showStepContent(STEP_CONTENT_ARRAY[CURRENT_STEP_INDEX]);
+}
+const handleNextStepButtonClick = () => {
+    if (CURRENT_STEP_INDEX === STEP_CONTENT_ARRAY.length - 1) return;
+    if (invalidStep()) return;
+    CURRENT_STEP_INDEX++;
+    toggleButtonVisibility(backStepButton, true);
+    showStepContent(STEP_CONTENT_ARRAY[CURRENT_STEP_INDEX]);
+}
 const createStrongElement = () => {
     return document.createElement('strong');
 }
@@ -225,7 +242,7 @@ const setActivatedState = element => {
 }
 const removeStepSelectedClass = () => {
     const children = Array.from(stepElement.children);
-    const childrenWithSelectedClass = children.filter(f => f.classList.contains(modifierSelectors.STEP_SELECTED));
+    const childrenWithSelectedClass = children.map(m => m.children[0]).filter(f => f.classList.contains(modifierSelectors.STEP_SELECTED));
     for (const child of childrenWithSelectedClass) {
         child.classList.remove(modifierSelectors.STEP_SELECTED);
     }
@@ -236,25 +253,29 @@ const addStepSelectedClass = () => {
     removeStepSelectedClass();
 
     const stepClassName = `step${CURRENT_STEP_INDEX + 1}`;
-    stepElement.children[stepClassName].classList.add(modifierSelectors.STEP_SELECTED);
+    stepElement.children[stepClassName].children[0].classList.add(modifierSelectors.STEP_SELECTED);
 }
 const hideAllStepContents = () => {
     const children = Array.from(stepContentElement.children);
-    const childrenShowing = children.filter(f => f.classList.contains('shown'));
+    //const childrenShowing = children.filter(f => f.classList.contains('shown'));
+    const childrenShowing = children.filter(f => f.style.display === 'flex' || f.style.display === '');
     for (const child of childrenShowing) {
-        child.classList.remove('shown');
+        //child.classList.remove('shown');
+        child.style.display = 'none';
     }
 }
 const showStepContent = name => {
     hideAllStepContents();
     const child = stepContentElement.children[name];
-    child.classList.add('shown');
+    //child.classList.add('shown');
+    child.style.display = 'flex';
     addStepSelectedClass();
 }
 const toggleButtonVisibility = (element, show) => element.style.visibility = show ? 'visible' : 'hidden';
 const initializeStepContent = () => {
     hideAllStepContents();
-    stepContentElement.children[stepContent.PERSONAL_INFO].classList.add('shown');
+    //stepContentElement.children[stepContent.PERSONAL_INFO].classList.add('shown');
+    stepContentElement.children[stepContent.PERSONAL_INFO].style.display = 'flex';
     CURRENT_STEP_INDEX = 0;
     addStepSelectedClass();
 
@@ -325,6 +346,11 @@ const clearAllInvalidState = formElements => {
         clearControlInvalidState(element);
     }
 }
+const toggleNextButtonState = (buttonElement, currentClass, newClass, text) => {
+    buttonElement.classList.remove(currentClass);
+    buttonElement.classList.add(newClass);
+    buttonElement.children[0].textContent = text;
+}
 const invalidStep = () => {
     let invalid = false;
 
@@ -361,6 +387,11 @@ const invalidStep = () => {
             }
             break;
         case stepContentOrder.ADD_ONS:
+            toggleNextButtonState(
+                document.querySelector('#nextStep'),
+                modifierSelectors.BUTTON_NEXT,
+                modifierSelectors.BUTTON_CONFIRM,
+                nextButtonText.CONFIRM);
             initFinishingUpStep();
             break;
         case stepContentOrder.FINISHING_UP:
@@ -424,15 +455,23 @@ switchPlanElement.addEventListener('change', event => {
     const arcadePlanPrice = document.querySelector('#arcade-plan-price');
     const advancedPlanPrice = document.querySelector('#advanced-plan-price');
     const proPlanPrice = document.querySelector('#pro-plan-price');
+    const freePlanInfoElements = document.querySelectorAll('.free-plan-info');
 
     if (event.target.checked) {
         changePlanPrice(arcadePlanPrice, planType.YEARLY, plan.ARCADE);
         changePlanPrice(advancedPlanPrice, planType.YEARLY, plan.ADVANCED);
         changePlanPrice(proPlanPrice, planType.YEARLY, plan.PRO);
+
+        Array.from(freePlanInfoElements).forEach(el => {
+           el.classList.add('free-plan-info--shown');
+        });
     } else {
         changePlanPrice(arcadePlanPrice, planType.MONTHLY, plan.ARCADE);
         changePlanPrice(advancedPlanPrice, planType.MONTHLY, plan.ADVANCED);
         changePlanPrice(proPlanPrice, planType.MONTHLY, plan.PRO);
+        Array.from(freePlanInfoElements).forEach(el => {
+            el.classList.remove('free-plan-info--shown');
+        });
     }
 
     clearAllActiveState(plansElement);

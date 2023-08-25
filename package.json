@@ -4,8 +4,10 @@
   "description": "Subscription form step by step",
   "main": "index.js",
   "scripts": {
-    "start": "servor . --browse --reload",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "servor build --browse --reload",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development"
   },
   "repository": {
     "type": "git",
@@ -18,6 +20,11 @@
   },
   "homepage": "https://github.com/markanthonyjc/multi-step-form#readme",
   "devDependencies": {
-    "servor": "^4.0.2"
+    "@babel/preset-env": "^7.22.10",
+    "babel-loader": "^9.1.3",
+    "html-webpack-plugin": "^5.5.3",
+    "servor": "^4.0.2",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
   }
 }
